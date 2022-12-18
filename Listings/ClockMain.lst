@@ -1,0 +1,116 @@
+C51 COMPILER V9.55   CLOCKMAIN                                                             07/26/2020 16:01:25 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE CLOCKMAIN
+OBJECT MODULE PLACED IN .\Objects\ClockMain.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE ClockMain.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRI
+                    -NT(.\Listings\ClockMain.lst) TABS(2) OBJECT(.\Objects\ClockMain.obj)
+
+line level    source
+
+   1          #include "Clock.h"
+   2          #include <stdio.h>
+   3          extern union rtc_data idata my_data;
+   4          unsigned long epoch; 
+   5          void Init_Device(void);
+   6          void test();
+   7          extern unsigned char xdata screen[];
+   8          void ptr1(char c,unsigned char k);
+   9          extern unsigned  char sec,min,hour,day,month,year;
+  10          
+  11          bit correct;
+  12          extern bit gpsReady;
+  13          
+  14          void main()
+  15          {
+  16   1        unsigned int i;
+  17   1      //  unsigned char c;
+  18   1        Init_Device();
+  19   1        WATCHDOG;
+  20   1        mbiInit();
+  21   1        TR2=1; //start timer 2 to 800Hz
+  22   1        TR1=1;
+  23   1        WATCHDOG;
+  24   1      
+  25   1        for (i=0;i<(NUM_OF_MBI*NUM_OF_COLUMNS*16);i++)
+  26   1         screen[i]=0x0;
+  27   1        mbiSend();
+  28   1        rtc_init();
+  29   1        if (!rtc_readram())
+  30   1        {   
+  31   2          for (i=0;i<sizeof( my_data.rtc_ram);i++)
+  32   2             my_data.rtc_ram[i]=0;
+  33   2          
+  34   2      
+  35   2          my_data.dat.INTENSITY=5;
+  36   2          my_data.dat.GMT=0;
+  37   2          rtc_writeram();            
+  38   2          rtc_writeTime( 0L);
+  39   2        }
+  40   1        my_data.dat.INTENSITY=50;
+  41   1        my_data.dat.GMT=3;
+  42   1        rtc_writeram(); 
+  43   1        WATCHDOG;
+  44   1        //rtc_writeTime( 1565723036L);
+  45   1        i=0;
+  46   1        while (1) {
+  47   2            WATCHDOG;
+  48   2            while (!TF2H); //800HZ refresh rate
+  49   2            TF2H=0;
+  50   2            epoch=rtc_readTime();
+  51   2            date_time(epoch);
+  52   2      
+  53   2            printf("\f%02bu%02bu%02bu",hour,min,sec);//mine 
+  54   2            screen [42]=(sec&1)?0:90;//mine
+C51 COMPILER V9.55   CLOCKMAIN                                                             07/26/2020 16:01:25 PAGE 2   
+
+  55   2              /*
+  56   2            if ((sec%57)>3)
+  57   2            {
+  58   2             printf("\f%02bu%02bu%02bu",hour,min,sec);
+  59   2             screen [42]=(sec&1)?0:80;
+  60   2             screen [43]=1;//mine
+  61   2             screen [44]=0;//mine
+  62   2            }
+  63   2            else
+  64   2            
+  65   2            {
+  66   2             printf("\f%2bu%02bu%02bu",day,month,year);
+  67   2             screen [42]=0;
+  68   2             screen [43]=0;//mine
+  69   2             screen [44]=1;//mine
+  70   2            }
+  71   2            */
+  72   2            my_data.dat.INTENSITY=((hour>18) & (hour<5))?100:80;
+  73   2            mbiSend();
+  74   2            if ( (hour==0) && (min==0) && (sec==0) && correct)  //evry one hour correct the time
+  75   2            {
+  76   3              correct=0;
+  77   3              gpsReady=0;
+  78   3              LED=1;
+  79   3            }
+  80   2            if (( correct==0) && (gpsReady))
+  81   2            {
+  82   3              LED=0;
+  83   3              epoch=gps_read();
+  84   3              rtc_writeTime( epoch);
+  85   3              correct=1;
+  86   3            }
+  87   2          
+  88   2        
+  89   2        }
+  90   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    269    ----
+   CONSTANT SIZE    =     17    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

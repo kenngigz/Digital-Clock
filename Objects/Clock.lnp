@@ -1,0 +1,10 @@
+".\Objects\STARTUP.obj",
+".\Objects\ClockInit.obj",
+".\Objects\MBI.obj",
+".\Objects\ClockMain.obj",
+".\Objects\rtc.obj",
+".\Objects\gps.obj" 
+TO ".\Objects\Clock" 
+PRINT(".\Listings\Clock.m51") RAMSIZE(256) 
+CODE( 0X0000-0X7FFF )
+XDATA( 0X0000-0X07FF )

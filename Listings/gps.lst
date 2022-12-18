@@ -1,0 +1,134 @@
+C51 COMPILER V9.55   GPS                                                                   07/26/2020 16:01:25 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE GPS
+OBJECT MODULE PLACED IN .\Objects\gps.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE gps.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\gps.lst) TABS(2) OBJECT(.\Objects\gps.obj)
+
+line level    source
+
+   1          #include "Clock.h"
+   2          #include <intrins.h>
+   3          
+   4          bit gpsReady;
+   5          char pdata gps[64];
+   6          
+   7          const char code *gpsData  ="$GPRMC,"; //not the right one no time repair
+   8          bit dat;
+   9          void uart()  interrupt 4 using 1  //uart INTERRUPT
+  10          {
+  11   1        static unsigned char inx;
+  12   1        unsigned char byte;
+  13   1        if (_testbit_(RI0))
+  14   1        {
+  15   2          byte=SBUF0;
+  16   2          if (gpsReady==0)
+  17   2              {
+  18   3               if (dat==0)
+  19   3                 {
+  20   4                  if ((byte==gpsData[inx])||(inx==2)) //using GPS with glonas is GN insteed GP
+  21   4                  {
+  22   5                      inx++;
+  23   5                      if (inx==7)
+  24   5                      {
+  25   6                          dat=1;
+  26   6                          inx=0;
+  27   6                      }
+  28   5                  }
+  29   4                  else
+  30   4                  {
+  31   5                      inx=0;
+  32   5                  }
+  33   4                 }
+  34   3               else
+  35   3               {
+  36   4                 gps[inx] = byte;
+  37   4                 inx++;
+  38   4                 if ((byte=='*')||(inx>61))
+  39   4                 {
+  40   5                    dat=0;
+  41   5                    inx=0;
+  42   5                    if ((gps[11]=='A')&&(inx<60))
+  43   5                        gpsReady=1;
+  44   5                 }
+  45   4               } 
+  46   3              }
+  47   2            }
+  48   1        TI0=0;
+  49   1      }
+  50          
+  51          
+  52          long gps_read()
+  53          {
+  54   1                // Valid GPS data is here
+C51 COMPILER V9.55   GPS                                                                   07/26/2020 16:01:25 PAGE 2   
+
+  55   1                   int hlp,ind, hh,mm,ss,dd,mn,yy;
+  56   1      
+  57   1                long t;
+  58   1      
+  59   1                    //rtc[0]=gps[5]&0xf+((gps[4]&0x0f)<<4)+1; //start soscilatur + 1 sec correction
+  60   1                    
+  61   1                    hh=(gps[0]&0xf)*10 + (gps[1]&0xf);
+  62   1                    mm=(gps[2]&0xf)*10 + (gps[3]&0xf);
+  63   1                    ss=(gps[4]&0xf)*10 + (gps[5]&0xf);
+  64   1                    
+  65   1      
+  66   1                    for (hlp=0,ind=5;hlp<8;)
+  67   1                        if (gps[ind++]==',')
+  68   1                            hlp++;
+  69   1      
+  70   1                    
+  71   1                    dd=(gps[ind+1]&0xf)+((gps[ind]&0x0f))*10;
+  72   1                    ind+=2;
+  73   1                    mn=(gps[ind+1]&0xf)+((gps[ind]&0x0f))*10;
+  74   1                    ind+=2;
+  75   1                    yy=(gps[ind+1]&0xf)+((gps[ind]&0x0f))*10+2000;      
+  76   1      
+  77   1      
+  78   1      
+  79   1       
+  80   1        //conerting to epoch
+  81   1       
+  82   1          //January and February are counted as months 13 and 14 of the previous year
+  83   1                     if(mn <= 2)
+  84   1                      {
+  85   2                       mn += 12;
+  86   2                       yy -= 1;
+  87   2                      }
+  88   1       
+  89   1                    //Convert years to days
+  90   1                    t = (365L * (unsigned long)yy) + ((unsigned long)yy / 4L) - ((unsigned long)yy / 100L) + ((u
+             -nsigned long)yy / 400L);
+  91   1                    //Convert months to days
+  92   1                    t += (30L * (unsigned long)mn) + (3L * ((unsigned long)mn + 1L) / 5L) + (unsigned long)dd;
+  93   1                    //Unix time starts on January 1st, 1970
+  94   1                    t -= 719561L;
+  95   1                    //Convert days to seconds
+  96   1                    t *= 86400L;
+  97   1                   //Add hours, minutes and seconds
+  98   1                   t += (3600L * (unsigned long)hh) + (60L * (unsigned long)mm) + (unsigned long)ss;
+  99   1       
+ 100   1                   //Return Unix time
+ 101   1      
+ 102   1                   return t;                
+ 103   1      
+ 104   1            }
+ 105                      
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    889    ----
+   CONSTANT SIZE    =      8    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =     64    ----
+   DATA SIZE        =      3      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+C51 COMPILER V9.55   GPS                                                                   07/26/2020 16:01:25 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

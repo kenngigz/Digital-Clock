@@ -1,0 +1,844 @@
+; .\Objects\MBI.SRC generated from: MBI.c
+; COMPILER INVOKED BY:
+;        C:\Keil_v5\C51\BIN\C51.EXE MBI.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\MBI.lst) TABS(2) SRC(.\Objects\MBI.SRC)
+
+$NOMOD51
+
+NAME	MBI
+
+CCF2	BIT	0D8H.2
+TB80	BIT	098H.3
+IDA0	DATA	096H
+SPI0CKR	DATA	0A2H
+Dclk	BIT	080H.2
+CCF3	BIT	0D8H.3
+IDA1	DATA	0F4H
+P0	DATA	080H
+SPIEN	BIT	0F8H.0
+CCF4	BIT	0D8H.4
+P1	DATA	090H
+CCF5	BIT	0D8H.5
+P2	DATA	0A0H
+ADC0CF	DATA	0BCH
+AC	BIT	0D0H.6
+PCA0	DATA	0F9H
+EIE1	DATA	0E6H
+RTC0KEY	DATA	0AEH
+EA	BIT	0A8H.7
+MCE0	BIT	098H.5
+EIE2	DATA	0E7H
+PSCTL	DATA	08FH
+CF	BIT	0D8H.7
+IT01CF	DATA	0E4H
+ADC0CN	DATA	0E8H
+P0MDOUT	DATA	0A4H
+P1MDOUT	DATA	0A5H
+TMR2RLH	DATA	0CBH
+IE	DATA	0A8H
+P2MDOUT	DATA	0A6H
+TMR3RLH	DATA	093H
+EIP1	DATA	0F6H
+TXBMT	BIT	0F8H.1
+EIP2	DATA	0F7H
+IDA0CN	DATA	0B9H
+PCA0CPH0	DATA	0FCH
+TMR2RLL	DATA	0CAH
+IDA1CN	DATA	0B5H
+PCA0CPH1	DATA	0EAH
+TMR3RLL	DATA	092H
+DP	DATA	082H
+PCA0CPH2	DATA	0ECH
+CR	BIT	0D8H.6
+T2SPLIT	BIT	0C8H.3
+TF2H	BIT	0C8H.7
+ADC0GT	DATA	0C3H
+PCA0CPH3	DATA	0EEH
+REN0	BIT	098H.4
+PCA0CPH4	DATA	0FEH
+PCA0CPL0	DATA	0FBH
+PCA0CPL1	DATA	0E9H
+PCA0CPM0	DATA	0DAH
+PCA0MD	DATA	0D9H
+PCA0CN	DATA	0D8H
+PCA0CPH5	DATA	0D3H
+PCA0CPL2	DATA	0EBH
+PCA0CPM1	DATA	0DBH
+TF2L	BIT	0C8H.6
+PCA0CPL3	DATA	0EDH
+PCA0CPM2	DATA	0DCH
+ADC0TK	DATA	0BAH
+IP	DATA	0B8H
+ARBLOST	BIT	0C0H.2
+ADC0LT	DATA	0C5H
+PCA0CPL4	DATA	0FDH
+PCA0CPM3	DATA	0DDH
+PCA0CPM4	DATA	0DEH
+PCA0CPL5	DATA	0D2H
+CRC0CN	DATA	084H
+CY	BIT	0D0H.7
+SI	BIT	0C0H.0
+PCA0CPM5	DATA	0CEH
+XBR0	DATA	0E1H
+SMB0CF	DATA	0C1H
+PFE0CN	DATA	0E3H
+XBR1	DATA	0E2H
+EMI0CN	DATA	0AAH
+ADC0MX	DATA	0BBH
+REF0CN	DATA	0D1H
+REG0CN	DATA	0C9H
+CRC0IN	DATA	085H
+AD0INT	BIT	0E8H.5
+ONESHOT	DATA	0AFH
+SP	DATA	081H
+TF2CEN	BIT	0C8H.4
+OV	BIT	0D0H.2
+SMB0CN	DATA	0C0H
+BURSTEN	BIT	0E8H.6
+TMR2	DATA	0CCH
+MODF	BIT	0F8H.5
+TMR3	DATA	094H
+P0ODEN	DATA	0B0H
+S0MODE	BIT	098H.7
+VDM0CN	DATA	0FFH
+P0MDIN	DATA	0F1H
+CPT0MD	DATA	09DH
+CPT0CN	DATA	09BH
+P1MDIN	DATA	0F2H
+CPT1MD	DATA	09CH
+CPT1CN	DATA	09AH
+P2MDIN	DATA	0F3H
+TF2LEN	BIT	0C8H.5
+P0MASK	DATA	0C7H
+SPI0CN	DATA	0F8H
+P1MASK	DATA	0BFH
+PCON	DATA	087H
+SPIF	BIT	0F8H.7
+T2RCLK	BIT	0C8H.1
+TMOD	DATA	089H
+TCON	DATA	088H
+WCOL	BIT	0F8H.6
+CRC0FLIP	DATA	0DFH
+NSSMD0	BIT	0F8H.2
+NSSMD1	BIT	0F8H.3
+TMR2CN	DATA	0C8H
+P0SKIP	DATA	0D4H
+TMR3CN	DATA	091H
+T2XCLK	BIT	0C8H.0
+P1SKIP	DATA	0D5H
+P2SKIP	DATA	0D6H
+IE0	BIT	088H.1
+CPT0MX	DATA	09FH
+IE1	BIT	088H.3
+OSCICL	DATA	0B3H
+CPT1MX	DATA	09EH
+CLKSEL	DATA	0A9H
+sdi	BIT	080H.6
+B	DATA	0F0H
+ADC0H	DATA	0BEH
+OSCICN	DATA	0B2H
+TMR2RL	DATA	0CAH
+ADC0L	DATA	0BDH
+TMR3RL	DATA	092H
+sdo	BIT	080H.3
+ACC	DATA	0E0H
+IDA0H	DATA	097H
+ES0	BIT	0A8H.4
+IDA1H	DATA	0F5H
+AD0EN	BIT	0E8H.7
+ET0	BIT	0A8H.1
+PCA0CP0	DATA	0FBH
+ET1	BIT	0A8H.3
+TF0	BIT	088H.5
+PCA0CP1	DATA	0E9H
+CLKMUL	DATA	0ABH
+mbiLE	BIT	0A0H.4
+ET2	BIT	0A8H.5
+RI0	BIT	098H.0
+TF1	BIT	088H.7
+PCA0CP2	DATA	0EBH
+IDA0L	DATA	096H
+PCA0CP3	DATA	0EDH
+IDA1L	DATA	0F4H
+TH0	DATA	08CH
+EX0	BIT	0A8H.0
+TI0	BIT	098H.1
+IT0	BIT	088H.0
+PCA0CP4	DATA	0FDH
+PCA0H	DATA	0FAH
+TH1	DATA	08DH
+MASTER	BIT	0C0H.7
+EX1	BIT	0A8H.2
+IT1	BIT	088H.2
+PCA0CP5	DATA	0D2H
+P	BIT	0D0H.0
+ACK	BIT	0C0H.1
+OSCXCN	DATA	0B1H
+TL0	DATA	08AH
+PCA0L	DATA	0F9H
+TL1	DATA	08BH
+TXMODE	BIT	0C0H.6
+PS0	BIT	0B8H.4
+PT0	BIT	0B8H.1
+LED	BIT	090H.2
+RS0	BIT	0D0H.3
+PT1	BIT	0B8H.3
+RS1	BIT	0D0H.4
+PT2	BIT	0B8H.5
+TR0	BIT	088H.4
+TR1	BIT	088H.6
+TR2	BIT	0C8H.2
+PX0	BIT	0B8H.0
+PX1	BIT	0B8H.2
+DPH	DATA	083H
+ADC0GTH	DATA	0C4H
+DPL	DATA	082H
+ADC0GTL	DATA	0C3H
+SBUF0	DATA	099H
+ESPI0	BIT	0A8H.6
+ADC0LTH	DATA	0C6H
+RSTSRC	DATA	0EFH
+P0MAT	DATA	0D7H
+CRC0DAT	DATA	086H
+P1MAT	DATA	0CFH
+SCON0	DATA	098H
+ADC0LTL	DATA	0C5H
+STA	BIT	0C0H.5
+PSPI0	BIT	0B8H.6
+SMB0DAT	DATA	0C2H
+TMR2H	DATA	0CDH
+SPI0CFG	DATA	0A1H
+TMR3H	DATA	095H
+CKCON	DATA	08EH
+RXOVRN	BIT	0F8H.4
+TMR2L	DATA	0CCH
+RTC0ADR	DATA	0ACH
+ACKRQ	BIT	0C0H.3
+TMR3L	DATA	094H
+AD0LJST	BIT	0E8H.2
+RTC0DAT	DATA	0ADH
+F0	BIT	0D0H.5
+FLSCL	DATA	0B6H
+AD0CM0	BIT	0E8H.0
+F1	BIT	0D0H.1
+STO	BIT	0C0H.4
+AD0CM1	BIT	0E8H.1
+SPI0DAT	DATA	0A3H
+ADC0	DATA	0BDH
+AD0WINT	BIT	0E8H.3
+AD0BUSY	BIT	0E8H.4
+PSW	DATA	0D0H
+CCF0	BIT	0D8H.0
+RB80	BIT	098H.2
+FLKEY	DATA	0B7H
+CCF1	BIT	0D8H.1
+?PR?_sendWord?MBI    SEGMENT CODE INBLOCK 
+?DT?_sendWord?MBI    SEGMENT DATA OVERLAYABLE 
+?PR?mbiInit?MBI      SEGMENT CODE INBLOCK 
+?DT?mbiInit?MBI      SEGMENT DATA OVERLAYABLE 
+?PR?mbiSend?MBI      SEGMENT CODE INBLOCK 
+?DT?mbiSend?MBI      SEGMENT DATA OVERLAYABLE 
+?PR?_putchar?MBI     SEGMENT CODE INBLOCK 
+?DT?MBI              SEGMENT DATA 
+?DT?_putchar?MBI     SEGMENT DATA OVERLAYABLE 
+?CO?MBI              SEGMENT CODE 
+?XD?MBI              SEGMENT XDATA 
+?XD?mbiSend?MBI      SEGMENT XDATA OVERLAYABLE 
+	EXTRN	IDATA (my_data)
+	EXTRN	CODE (?C?ILDIX)
+	EXTRN	CODE (?C?CLDPTR)
+	EXTRN	CODE (?C?MEMSET)
+	PUBLIC	ctrl
+	PUBLIC	screen
+	PUBLIC	segments
+	PUBLIC	numbers
+	PUBLIC	_putchar
+	PUBLIC	mbiSend
+	PUBLIC	mbiInit
+
+	RSEG  ?DT?mbiSend?MBI
+?mbiSend?BYTE:
+          c?243:   DS   1
+	ORG  1
+          d?244:   DS   1
+
+	RSEG  ?DT?_sendWord?MBI
+?_sendWord?BYTE:
+          w?040:   DS   2
+	ORG  2
+         le?041:   DS   1
+
+	RSEG  ?DT?mbiInit?MBI
+?mbiInit?BYTE:
+          c?142:   DS   1
+
+	RSEG  ?DT?_putchar?MBI
+?_putchar?BYTE:
+          c?346:   DS   1
+	ORG  1
+       mask?349:   DS   1
+
+	RSEG  ?DT?MBI
+       xpos?347:   DS   1
+           ctrl:   DS   2
+
+	RSEG  ?XD?MBI
+         screen:   DS   48
+
+	RSEG  ?XD?mbiSend?MBI
+        tmp?245:   DS   3
+
+	RSEG  ?CO?MBI
+numbers:
+	DB	0FCH
+	DB	060H
+	DB	0DAH
+	DB	0F2H
+	DB	066H
+	DB	0B6H
+	DB	0BEH
+	DB	0E0H
+	DB	0FEH
+	DB	0F6H
+	DB	09CH
+	DB	000H
+	DB	000H
+	DB	000H
+	DB	000H
+	DB  000H
+
+
+segments:
+	DB	003H
+	DB	000H
+	DB	027H
+	DB	024H
+	DB	021H
+	DB	009H
+	DB	00CH
+	DB	015H
+	DB	012H
+	DB	00FH
+	DB	01BH
+	DB	01EH
+	DB	006H
+	DB	02DH
+	DB	004H
+	DB	001H
+	DB	028H
+	DB	025H
+	DB	022H
+	DB	00AH
+	DB	00DH
+	DB	016H
+	DB	013H
+	DB	010H
+	DB	01CH
+	DB	01FH
+	DB	007H
+	DB	02EH
+	DB	005H
+	DB	002H
+	DB	029H
+	DB	026H
+	DB	023H
+	DB	00BH
+	DB	00EH
+	DB	017H
+	DB	014H
+	DB	011H
+	DB	01DH
+	DB	020H
+	DB	008H
+	DB	02FH
+
+; #include "Clock.h"
+; #include <intrins.h>
+; #include <string.h>
+; 
+; extern union rtc_data idata my_data;
+; 
+; 
+; #define NO_LACH            -1
+; 
+; #define DATA_LACH          1
+; #define GLOBAL_LACH        3
+; #define READ_CONFIGURATION 5
+; #define EABLE_ERRORDETECT  7
+; #define READ_ERRORSTATUS   9
+; #define WRITE_CONFIG       11
+; #define RESET_PWM          13
+; 
+; 
+; 
+; union ctrl {
+;               struct control {
+; 							 unsigned int bt0:1; // 0    -> timeout of gck 0 - diable 1 enable	
+; 					     unsigned int bt1:1; // 0    -> thermal protection 0- disable  1-enble
+; 					     unsigned int bt9:8; // 0xab -> current gain adjustment
+; 					     unsigned int bta:1; // 1    -> pwm data sinhronization 0- auto  1- manual
+; 					     unsigned int btb:1; // 0    -> pwm counter reset 0-disable 1- enable
+; 					     unsigned int btc:1; // 1    -> 0 - 6 bit pwm 1 - 12 bit pwm
+; 					     unsigned int btd:1; // 1    -> reserved bit
+; 					     unsigned int bte:1; // 0    -> thermal eror flag 0 - ok readonly							 
+; 					     unsigned int btf:1; // 0    -> Data loading 0- 15 time + 1 datalach  1- 16 time +1 datalach
+;               } control;
+;              unsigned int i;
+; 					};
+; 					
+; union  ctrl ctrl;
+; // default ctrl 0b0011011010101100 - >	0x36ac	
+; 					
+; static void sendWord(unsigned int w,char le)
+
+	RSEG  ?PR?_sendWord?MBI
+_sendWord:
+	USING	0
+			; SOURCE LINE # 38
+	MOV  	w?040,R6
+	MOV  	w?040+01H,R7
+	MOV  	le?041,R5
+; {
+			; SOURCE LINE # 39
+; 	
+;       w=w;
+			; SOURCE LINE # 41
+; 	    le=le;
+			; SOURCE LINE # 42
+; #pragma asm
+; ;	     CLR  mbiLE
+	  ;	     CLR  mbiLE
+; ;	     CLR  Dclk
+	  ;	     CLR  Dclk
+; 	
+	  
+; 	     MOV A,#10H
+	  MOV A,#10H
+; 	     CLR C
+	  CLR C
+; 	     SUBB A,R5
+	  SUBB A,R5
+; 	     XCH  A,R5
+	  XCH  A,R5
+; 	
+	  
+; 		   MOV R4,#8	
+	  MOV R4,#8	
+; 		   MOV A,R6		   ;high byte of w
+	  MOV A,R6		   ;high byte of w
+; LOOP1:
+	  LOOP1:
+; 		   RLC A
+	  RLC A
+; 		   MOV sdi,C
+	  MOV sdi,C
+; 		   SETB Dclk
+	  SETB Dclk
+; 		   DJNZ R5,SETLE1  ;le?
+	  DJNZ R5,SETLE1  ;le?
+; 		   SETB mbiLE
+	  SETB mbiLE
+; SETLE1:	
+	  SETLE1:	
+;        CLR  Dclk
+	  CLR  Dclk
+; 		   DJNZ R4,LOOP1
+	  DJNZ R4,LOOP1
+; 		   
+	  
+; 		   MOV R4,#8
+	  MOV R4,#8
+; 		   MOV A,R7	   ;LOW BYTE OF W
+	  MOV A,R7	   ;LOW BYTE OF W
+; LOOP2:		  
+	  LOOP2:		  
+; 		   RLC A
+	  RLC A
+; 		   MOV  sdi,C
+	  MOV  sdi,C
+; 		   SETB Dclk
+	  SETB Dclk
+; 		   DJNZ R5,SETLE2  ;le?
+	  DJNZ R5,SETLE2  ;le?
+; 		   SETB mbiLE
+	  SETB mbiLE
+; SETLE2:	
+	  SETLE2:	
+;        CLR  Dclk
+	  CLR  Dclk
+; 		   DJNZ R4,LOOP2		   
+	  DJNZ R4,LOOP2		   
+;        CLR  mbiLE
+	  CLR  mbiLE
+; #pragma endasm
+; 
+; }
+			; SOURCE LINE # 78
+	RET  	
+; END OF _sendWord
+
+; 
+; //THIS MBI NOT RECIEVE CONFIG OR I MISTAKE BUT 
+; // IS SET TO 16 + 1 datalach
+; void mbiInit()
+
+	RSEG  ?PR?mbiInit?MBI
+mbiInit:
+	USING	0
+			; SOURCE LINE # 82
+;  {
+			; SOURCE LINE # 83
+; 	 unsigned char c;
+; 	 ctrl.i=0x36ac; // default control
+			; SOURCE LINE # 85
+	MOV  	ctrl,#036H
+	MOV  	ctrl+01H,#0ACH
+;    ctrl.control.btf=1;    
+			; SOURCE LINE # 86
+	ORL  	ctrl,#080H
+; 	 ctrl.control.bt9=0xff;
+			; SOURCE LINE # 87
+	ORL  	ctrl+01H,#0FCH
+	ORL  	ctrl,#03H
+; 	 for (c=0;c<NUM_OF_MBI-1;c++)
+			; SOURCE LINE # 88
+	CLR  	A
+	MOV  	c?142,A
+?C0002:
+; 	  {
+			; SOURCE LINE # 89
+; 			sendWord(ctrl.i,NO_LACH);
+			; SOURCE LINE # 90
+	MOV  	R5,#0FFH
+	MOV  	R7,ctrl+01H
+	MOV  	R6,ctrl
+	LCALL	_sendWord
+; 		}
+			; SOURCE LINE # 91
+	INC  	c?142
+	MOV  	A,c?142
+	CLR  	C
+	SUBB 	A,#02H
+	JC   	?C0002
+?C0003:
+; 	 sendWord(ctrl.i,WRITE_CONFIG);
+			; SOURCE LINE # 92
+	MOV  	R5,#0BH
+	MOV  	R7,ctrl+01H
+	MOV  	R6,ctrl
+	LJMP 	_sendWord
+; END OF mbiInit
+
+;  }
+;  
+;  
+; 
+; unsigned char xdata screen[NUM_OF_MBI*NUM_OF_COLUMNS*16];
+; 
+; void mbiSend()
+
+	RSEG  ?PR?mbiSend?MBI
+mbiSend:
+	USING	0
+			; SOURCE LINE # 99
+;  {
+			; SOURCE LINE # 100
+; 	 unsigned char c,d;
+; 
+;    unsigned char *(xdata tmp);
+; 
+; 	 tmp=&screen[0];
+			; SOURCE LINE # 105
+	MOV  	DPTR,#tmp?245
+	MOV  	A,#01H
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#HIGH (screen)
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#LOW (screen)
+	MOVX 	@DPTR,A
+; 	 for (d=16;d!=0;d--)
+			; SOURCE LINE # 106
+	MOV  	d?244,#010H
+?C0006:
+; 	  {
+			; SOURCE LINE # 107
+; 	   for (c=NUM_OF_MBI-1;c!=0;c--)
+			; SOURCE LINE # 108
+	MOV  	c?243,#02H
+?C0009:
+; 			  sendWord(((int) *tmp++)*0x100,NO_LACH);
+			; SOURCE LINE # 109
+	MOV  	DPTR,#tmp?245
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	CLR  	A
+	MOV  	B,#01H
+	LCALL	?C?ILDIX
+	MOV  	R1,B
+	MOV  	R2,A
+	LCALL	?C?CLDPTR
+	MOV  	R7,#00H
+	MOV  	R6,A
+	MOV  	R5,#0FFH
+	LCALL	_sendWord
+	DJNZ 	c?243,?C0009
+?C0010:
+; 		 sendWord(((int) *tmp++)*0x100,DATA_LACH);
+			; SOURCE LINE # 110
+	MOV  	DPTR,#tmp?245
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	CLR  	A
+	MOV  	B,#01H
+	LCALL	?C?ILDIX
+	MOV  	R1,B
+	MOV  	R2,A
+	LCALL	?C?CLDPTR
+	MOV  	R7,#00H
+	MOV  	R6,A
+	MOV  	R5,#01H
+	LCALL	_sendWord
+; 		}
+			; SOURCE LINE # 111
+	DJNZ 	d?244,?C0006
+?C0007:
+; 
+; 
+; 	 sendWord(((int) (*tmp))*0x100,GLOBAL_LACH);
+			; SOURCE LINE # 114
+	MOV  	DPTR,#tmp?245
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R2,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R1,A
+	LCALL	?C?CLDPTR
+	MOV  	R7,#00H
+	MOV  	R6,A
+	MOV  	R5,#03H
+	LJMP 	_sendWord
+; END OF mbiSend
+
+; 
+; 		
+;  }
+;  
+; 
+; 																				// 0    1    2   3    4    5   6    7    8    9     C
+;  const unsigned char code numbers[16]= {0xfc,0x60,0xda,0xf2,0x66,0xb6,0xbe,0xe0,0xfe,0xf6,0x9c,0,0,0,0};
+;  const unsigned char code segments[6][7] = {{3 , 0,39,36,33, 9,12},
+;                                            {21,18,15,27,30, 6,45},
+; 																					 { 4, 1,40,37,34,10,13},
+; 																					 {22,19,16,28,31, 7,46},
+; 																					 { 5, 2,41,38,35,11,14},
+; 																					 {23,20,17,29,32, 8,47}};
+;  
+; char putchar(char c)
+
+	RSEG  ?PR?_putchar?MBI
+_putchar:
+	USING	0
+			; SOURCE LINE # 129
+	MOV  	c?346,R7
+; {
+			; SOURCE LINE # 130
+; 	static unsigned char xpos;
+; 	unsigned char i;
+; 	unsigned char mask;
+; 	if (xpos>5) 
+			; SOURCE LINE # 134
+	MOV  	A,xpos?347
+	SETB 	C
+	SUBB 	A,#05H
+	JC   	?C0013
+; 		xpos=5;
+			; SOURCE LINE # 135
+	MOV  	xpos?347,#05H
+?C0013:
+; 	switch (c)
+			; SOURCE LINE # 136
+	MOV  	A,c?346
+	ADD  	A,#0F4H
+	JZ   	?C0018
+	DEC  	A
+	JZ   	?C0016
+	ADD  	A,#0EDH
+	JZ   	?C0019
+	ADD  	A,#0DDH
+	JNZ  	?C0020
+; 	{
+			; SOURCE LINE # 137
+; 		case 'C':
+			; SOURCE LINE # 138
+?C0015:
+; 			mask=numbers[10];
+			; SOURCE LINE # 139
+	MOV  	DPTR,#numbers+0AH
+; 		break;
+			; SOURCE LINE # 140
+	SJMP 	?C0026
+; 		case '\r':
+			; SOURCE LINE # 141
+?C0016:
+; 			xpos=0;
+			; SOURCE LINE # 142
+	CLR  	A
+	MOV  	xpos?347,A
+; 		 return c;
+			; SOURCE LINE # 143
+	MOV  	R7,c?346
+	RET  	
+; 		case '\f':
+			; SOURCE LINE # 144
+?C0018:
+; 			xpos=0;
+			; SOURCE LINE # 145
+	CLR  	A
+	MOV  	xpos?347,A
+; 		  memset(screen,0,sizeof(screen));
+			; SOURCE LINE # 146
+	MOV  	R6,A
+	MOV  	R7,#030H
+	MOV  	R5,A
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (screen)
+	MOV  	R1,#LOW (screen)
+	LCALL	?C?MEMSET
+; 			return c;
+			; SOURCE LINE # 147
+	MOV  	R7,c?346
+	RET  	
+; 		case ' ':
+			; SOURCE LINE # 148
+?C0019:
+; 			mask=0;
+			; SOURCE LINE # 149
+	CLR  	A
+	MOV  	mask?349,A
+; 		break;
+			; SOURCE LINE # 150
+	SJMP 	?C0014
+; 		
+; 		default:
+			; SOURCE LINE # 152
+?C0020:
+; 			mask=numbers[c&0x0f];
+			; SOURCE LINE # 153
+	MOV  	A,c?346
+	ANL  	A,#0FH
+	MOV  	R7,A
+	RLC  	A
+	SUBB 	A,ACC
+	MOV  	R6,A
+	MOV  	A,#LOW (numbers)
+	ADD  	A,R7
+	MOV  	DPL,A
+	MOV  	A,#HIGH (numbers)
+	ADDC 	A,R6
+	MOV  	DPH,A
+?C0026:
+	CLR  	A
+	MOVC 	A,@A+DPTR
+	MOV  	mask?349,A
+; 	}
+			; SOURCE LINE # 154
+?C0014:
+; 	
+; 	for (i=0;i<7;i++)
+			; SOURCE LINE # 156
+;---- Variable 'i?348' assigned to Register 'R7' ----
+	CLR  	A
+	MOV  	R7,A
+?C0021:
+; 	 {
+			; SOURCE LINE # 157
+; 		 if (mask&0x80)
+			; SOURCE LINE # 158
+	MOV  	A,mask?349
+	JNB  	ACC.7,?C0024
+; 			 screen[(segments[xpos][i])]=my_data.dat.INTENSITY;
+			; SOURCE LINE # 159
+	MOV  	R0,#LOW (my_data)
+	MOV  	A,@R0
+	MOV  	R6,A
+	MOV  	A,xpos?347
+	MOV  	B,#07H
+	MUL  	AB
+	ADD  	A,#LOW (segments)
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,#HIGH (segments)
+	MOV  	DPH,A
+	MOV  	A,DPL
+	ADD  	A,R7
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,DPH
+	MOV  	DPH,A
+	CLR  	A
+	MOVC 	A,@A+DPTR
+	ADD  	A,#LOW (screen)
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,#HIGH (screen)
+	MOV  	DPH,A
+	MOV  	A,R6
+	MOVX 	@DPTR,A
+	SJMP 	?C0025
+?C0024:
+; 		 else
+; 			 screen[(segments[xpos][i])]=0;
+			; SOURCE LINE # 161
+	MOV  	A,xpos?347
+	MOV  	B,#07H
+	MUL  	AB
+	ADD  	A,#LOW (segments)
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,#HIGH (segments)
+	MOV  	DPH,A
+	MOV  	A,DPL
+	ADD  	A,R7
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,DPH
+	MOV  	DPH,A
+	CLR  	A
+	MOVC 	A,@A+DPTR
+	ADD  	A,#LOW (screen)
+	MOV  	DPL,A
+	CLR  	A
+	ADDC 	A,#HIGH (screen)
+	MOV  	DPH,A
+	CLR  	A
+	MOVX 	@DPTR,A
+?C0025:
+; 		 mask<<=1;
+			; SOURCE LINE # 162
+	MOV  	A,mask?349
+	ADD  	A,ACC
+	MOV  	mask?349,A
+; 	 }
+			; SOURCE LINE # 163
+	INC  	R7
+	CJNE 	R7,#07H,?C0021
+?C0022:
+; 	 xpos++;
+			; SOURCE LINE # 164
+	INC  	xpos?347
+; 	 return c;
+			; SOURCE LINE # 165
+	MOV  	R7,c?346
+; }
+			; SOURCE LINE # 166
+?C0017:
+	RET  	
+; END OF _putchar
+
+	END

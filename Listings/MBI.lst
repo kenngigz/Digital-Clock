@@ -1,0 +1,204 @@
+C51 COMPILER V9.55   MBI                                                                   07/26/2020 16:01:25 PAGE 1   
+
+
+C51 COMPILER V9.55, COMPILATION OF MODULE MBI
+NO OBJECT MODULE REQUESTED
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE MBI.c ROM(COMPACT) OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\L
+                    -istings\MBI.lst) TABS(2) SRC(.\Objects\MBI.SRC)
+
+line level    source
+
+   1          #include "Clock.h"
+   2          #include <intrins.h>
+   3          #include <string.h>
+   4          
+   5          extern union rtc_data idata my_data;
+   6          
+   7          
+   8          #define NO_LACH            -1
+   9          
+  10          #define DATA_LACH          1
+  11          #define GLOBAL_LACH        3
+  12          #define READ_CONFIGURATION 5
+  13          #define EABLE_ERRORDETECT  7
+  14          #define READ_ERRORSTATUS   9
+  15          #define WRITE_CONFIG       11
+  16          #define RESET_PWM          13
+  17          
+  18          
+  19          
+  20          union ctrl {
+  21                        struct control {
+  22                         unsigned int bt0:1; // 0    -> timeout of gck 0 - diable 1 enable  
+  23                         unsigned int bt1:1; // 0    -> thermal protection 0- disable  1-enble
+  24                         unsigned int bt9:8; // 0xab -> current gain adjustment
+  25                         unsigned int bta:1; // 1    -> pwm data sinhronization 0- auto  1- manual
+  26                         unsigned int btb:1; // 0    -> pwm counter reset 0-disable 1- enable
+  27                         unsigned int btc:1; // 1    -> 0 - 6 bit pwm 1 - 12 bit pwm
+  28                         unsigned int btd:1; // 1    -> reserved bit
+  29                         unsigned int bte:1; // 0    -> thermal eror flag 0 - ok readonly              
+  30                         unsigned int btf:1; // 0    -> Data loading 0- 15 time + 1 datalach  1- 16 time +1 datalach
+  31                        } control;
+  32                       unsigned int i;
+  33                    };
+  34                    
+  35          union  ctrl ctrl;
+  36          // default ctrl 0b0011011010101100 - >  0x36ac  
+  37                    
+  38          static void sendWord(unsigned int w,char le)
+  39          {
+  40   1        
+  41   1            w=w;
+  42   1            le=le;
+  43   1      #pragma asm
+  44   1      ;      CLR  mbiLE
+  45   1      ;      CLR  Dclk
+  46   1        
+  47   1             MOV A,#10H
+  48   1             CLR C
+  49   1             SUBB A,R5
+  50   1             XCH  A,R5
+  51   1        
+  52   1             MOV R4,#8  
+  53   1             MOV A,R6      ;high byte of w
+  54   1      LOOP1:
+C51 COMPILER V9.55   MBI                                                                   07/26/2020 16:01:25 PAGE 2   
+
+  55   1             RLC A
+  56   1             MOV sdi,C
+  57   1             SETB Dclk
+  58   1             DJNZ R5,SETLE1  ;le?
+  59   1             SETB mbiLE
+  60   1      SETLE1: 
+  61   1             CLR  Dclk
+  62   1             DJNZ R4,LOOP1
+  63   1             
+  64   1             MOV R4,#8
+  65   1             MOV A,R7    ;LOW BYTE OF W
+  66   1      LOOP2:      
+  67   1             RLC A
+  68   1             MOV  sdi,C
+  69   1             SETB Dclk
+  70   1             DJNZ R5,SETLE2  ;le?
+  71   1             SETB mbiLE
+  72   1      SETLE2: 
+  73   1             CLR  Dclk
+  74   1             DJNZ R4,LOOP2       
+  75   1             CLR  mbiLE
+  76   1      #pragma endasm
+  77   1      
+  78   1      }
+  79          
+  80          //THIS MBI NOT RECIEVE CONFIG OR I MISTAKE BUT 
+  81          // IS SET TO 16 + 1 datalach
+  82          void mbiInit()
+  83           {
+  84   1         unsigned char c;
+  85   1         ctrl.i=0x36ac; // default control
+  86   1         ctrl.control.btf=1;    
+  87   1         ctrl.control.bt9=0xff;
+  88   1         for (c=0;c<NUM_OF_MBI-1;c++)
+  89   1          {
+  90   2            sendWord(ctrl.i,NO_LACH);
+  91   2          }
+  92   1         sendWord(ctrl.i,WRITE_CONFIG);
+  93   1       }
+  94           
+  95           
+  96          
+  97          unsigned char xdata screen[NUM_OF_MBI*NUM_OF_COLUMNS*16];
+  98          
+  99          void mbiSend()
+ 100           {
+ 101   1         unsigned char c,d;
+ 102   1      
+ 103   1         unsigned char *(xdata tmp);
+ 104   1      
+ 105   1         tmp=&screen[0];
+ 106   1         for (d=16;d!=0;d--)
+ 107   1          {
+ 108   2           for (c=NUM_OF_MBI-1;c!=0;c--)
+ 109   2              sendWord(((int) *tmp++)*0x100,NO_LACH);
+ 110   2           sendWord(((int) *tmp++)*0x100,DATA_LACH);
+ 111   2          }
+ 112   1      
+ 113   1      
+ 114   1         sendWord(((int) (*tmp))*0x100,GLOBAL_LACH);
+ 115   1      
+ 116   1          
+C51 COMPILER V9.55   MBI                                                                   07/26/2020 16:01:25 PAGE 3   
+
+ 117   1       }
+ 118           
+ 119          
+ 120                                                  // 0    1    2   3    4    5   6    7    8    9     C
+ 121           const unsigned char code numbers[16]= {0xfc,0x60,0xda,0xf2,0x66,0xb6,0xbe,0xe0,0xfe,0xf6,0x9c,0,0,0,0};
+ 122           const unsigned char code segments[6][7] = {{3 , 0,39,36,33, 9,12},
+ 123                                                     {21,18,15,27,30, 6,45},
+ 124                                                     { 4, 1,40,37,34,10,13},
+ 125                                                     {22,19,16,28,31, 7,46},
+ 126                                                     { 5, 2,41,38,35,11,14},
+ 127                                                     {23,20,17,29,32, 8,47}};
+ 128           
+ 129          char putchar(char c)
+ 130          {
+ 131   1        static unsigned char xpos;
+ 132   1        unsigned char i;
+ 133   1        unsigned char mask;
+ 134   1        if (xpos>5) 
+ 135   1          xpos=5;
+ 136   1        switch (c)
+ 137   1        {
+ 138   2          case 'C':
+ 139   2            mask=numbers[10];
+ 140   2          break;
+ 141   2          case '\r':
+ 142   2            xpos=0;
+ 143   2           return c;
+ 144   2          case '\f':
+ 145   2            xpos=0;
+ 146   2            memset(screen,0,sizeof(screen));
+ 147   2            return c;
+ 148   2          case ' ':
+ 149   2            mask=0;
+ 150   2          break;
+ 151   2          
+ 152   2          default:
+ 153   2            mask=numbers[c&0x0f];
+ 154   2        }
+ 155   1        
+ 156   1        for (i=0;i<7;i++)
+ 157   1         {
+ 158   2           if (mask&0x80)
+ 159   2             screen[(segments[xpos][i])]=my_data.dat.INTENSITY;
+ 160   2           else
+ 161   2             screen[(segments[xpos][i])]=0;
+ 162   2           mask<<=1;
+ 163   2         }
+ 164   1         xpos++;
+ 165   1         return c;
+ 166   1      }
+ 167          
+ 168          
+ 169           
+ 170          
+ 171          
+ 172            
+ 173          
+ 174          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    441    ----
+C51 COMPILER V9.55   MBI                                                                   07/26/2020 16:01:25 PAGE 4   
+
+   CONSTANT SIZE    =     58    ----
+   XDATA SIZE       =     48       3
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
